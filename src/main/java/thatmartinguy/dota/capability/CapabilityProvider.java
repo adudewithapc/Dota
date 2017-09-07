@@ -11,9 +11,9 @@ import javax.annotation.Nullable;
 public class CapabilityProvider implements ICapabilitySerializable<NBTBase>
 {
     private Capability capability;
-    private IHeroCapability instance;
+    private ICapability instance;
 
-    public CapabilityProvider(Capability capability, IHeroCapability instance)
+    public CapabilityProvider(Capability capability, ICapability instance)
     {
         this.capability = capability;
         this.instance = instance;

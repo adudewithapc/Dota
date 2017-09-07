@@ -30,12 +30,15 @@ public class Dota
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        proxy.preInit();
+
         CapabilityManager.INSTANCE.register(IHeroCapability.class, new CapabilityStorage<>(), HeroCapability.class);
     }
 
+    @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-
+        proxy.init();
     }
 
     @SidedProxy(clientSide = CLIENT_PROXY_LOCATION, serverSide = SERVER_PROXY_LOCATION)

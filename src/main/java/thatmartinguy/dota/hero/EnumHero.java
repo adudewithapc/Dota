@@ -22,4 +22,9 @@ public enum EnumHero
     {
         return hero.getName();
     }
+
+    public static Hero getHeroByID(int ID)
+    {
+        return EnumHero.values()[ID].hero;
+    }
 }

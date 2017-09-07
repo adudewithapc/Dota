@@ -7,8 +7,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import thatmartinguy.dota.capability.Capabilities;
 import thatmartinguy.dota.capability.IHeroCapability;
-import thatmartinguy.dota.event.CapabilityEventHandler;
 import thatmartinguy.dota.hero.EnumHero;
 
 public class ItemHeroChecker extends ItemBase
@@ -21,9 +21,9 @@ public class ItemHeroChecker extends ItemBase
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
-        if(playerIn.hasCapability(CapabilityEventHandler.HERO_CAPABILITY, null))
+        if(playerIn.hasCapability(Capabilities.HERO_CAPABILITY, null))
         {
-            IHeroCapability heroCapability = playerIn.getCapability(CapabilityEventHandler.HERO_CAPABILITY, null);
+            IHeroCapability heroCapability = playerIn.getCapability(Capabilities.HERO_CAPABILITY, null);
 
             if(heroCapability.getHero().getName().equals(EnumHero.NONE.getName()))
             {
