@@ -35,7 +35,7 @@ public class Ability
     public Ability(String name, int maxCooldown, int manaCost)
     {
         this.name = name;
-        this.maxCooldown = maxCooldown;
+        this.maxCooldown = maxCooldown * 20;
         this.manaCost = manaCost;
     }
 
@@ -53,6 +53,8 @@ public class Ability
         else
         {
             execute(player, traceResult);
+
+            startCooldown(player.world);
         }
     }
 
@@ -75,7 +77,7 @@ public class Ability
     public CastResult getCastResult(EntityPlayer player, @Nullable RayTraceResult traceResult)
     {
         IHeroCapability heroCapability = player.getCapability(Capabilities.HERO_CAPABILITY, null);
-        if(player.world.getWorldTime() < cooldown + maxCooldown)
+        if(isAbilityCooling(player.world))
             return ON_COOLDOWN;
         if(heroCapability.getMana() > heroCapability.getMaxMana())
             return NO_MANA;
@@ -102,6 +104,18 @@ public class Ability
         return hasPassive;
     }
 
+    /**
+     * Starts the cooldown if possible
+     * @param world The world object to get the time from
+     */
+    private void startCooldown(World world)
+    {
+        if(!isAbilityCooling(world))
+        {
+            this.cooldown = world.getWorldTime();
+        }
+    }
+
     public void setActivatable(boolean activatable)
     {
         this.activatable = activatable;
@@ -119,7 +133,7 @@ public class Ability
      */
     public boolean isAbilityCooling(World world)
     {
-        return world.getWorldTime() <= cooldown + maxCooldown;
+        return world.getWorldTime() < cooldown + maxCooldown;
     }
 
     protected enum CastResult

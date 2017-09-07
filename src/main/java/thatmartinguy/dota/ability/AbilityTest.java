@@ -10,7 +10,7 @@ public class AbilityTest extends Ability
 {
     public AbilityTest()
     {
-        super("test");
+        super("test", 3, 0);
     }
 
     @Override
